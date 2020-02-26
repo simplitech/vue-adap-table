@@ -16,9 +16,10 @@ Vue.use(VueAdapTable)
 ```
 On your Scss:
 ```scss
-@import "~@simpli/vue-modal/scss/adapOrderby";
-@import "~@simpli/vue-modal/scss/adapPagination";
-@import "~@simpli/vue-modal/scss/adapSearchfield";
+@import "~@simpli/vue-adap-table/scss/adapOrderby";
+@import "~@simpli/vue-adap-table/scss/adapPagination";
+@import "~@simpli/vue-adap-table/scss/adapSearchfield";
+$simple-line-font-path: "~simple-line-icons/fonts/" !default;
 @import "~simple-line-icons/scss/simple-line-icons";
 ```
 
@@ -38,7 +39,7 @@ On your Scss:
     </th>
   </tr>
 
-  <tr v-for="item in collection.all()" :key="item.$id">
+  <tr v-for="item in collection.items" :key="item.$id">
     <td>
       {{ item.title }}
     </td>
