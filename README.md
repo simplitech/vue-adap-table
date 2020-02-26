@@ -1,6 +1,6 @@
 # Vue-Adap-Table
 
-A Vue adaptable table, many components to be used to render and control lists 
+A Vue adaptable table, some components to be used to render and control [Page Collections](https://github.com/simplitech/resource-collection)
 
 # Install
 ```
@@ -22,7 +22,7 @@ On your Scss:
 @import "~simple-line-icons/scss/simple-line-icons";
 ```
 
-## Basic Usage
+## Usage
 ```html
 <adap-searchfield :collection="collection" />
 
@@ -38,7 +38,7 @@ On your Scss:
     </th>
   </tr>
 
-  <tr v-for="(item, i) in collection.all()" :key="item.$id">
+  <tr v-for="item in collection.all()" :key="item.$id">
     <td>
       {{ item.title }}
     </td>
@@ -48,7 +48,9 @@ On your Scss:
   </tr>
 </table>
 
-<adap-pagination :collection="collection" :gap="optionalNumberOfNumberedPages" />
+<adap-pagination
+    :collection="collection"
+    :gap="optionalNumberOfNumberedPages" />
 ```
 On Code:
 ```typescript
