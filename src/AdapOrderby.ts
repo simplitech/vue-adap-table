@@ -5,9 +5,9 @@ const template = `
     {{ label }}
     <slot></slot>
     <span :class="{
-    'adap-orderby__caret': collection.orderBy === name, 
-    'adap-orderby__caret--asc': collection.asc, 
-    'adap-orderby__caret--desc': !collection.asc 
+    'adap-orderby__caret': collection.orderBy === name,
+    'adap-orderby__caret--asc': collection.asc,
+    'adap-orderby__caret--desc': !collection.asc
     }"></span>
   </div>
 `
@@ -27,6 +27,16 @@ export class AdapOrderby extends Vue {
   label!: string
 
   async orderBy() {
-    await this.collection.queryOrderBy(this.name)
+    try {
+      this.$emit('beforeQuery')
+      PageCollection.defaultBeforeQueryAction()
+      await this.collection.queryOrderBy(this.name)
+      this.$emit('afterQuery')
+      PageCollection.defaultAfterQueryAction()
+    } catch (e) {
+      this.$emit('errorQuery')
+      PageCollection.defaultErrorQueryAction()
+      throw e
+    }
   }
 }

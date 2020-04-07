@@ -67,12 +67,12 @@
     "vue-property-decorator": "^7.2.0"
   },
   "peerDependencies": {
-    "@simpli/resource-collection": "1.0.5",
+    "@simpli/resource-collection": "1.0.8",
     "class-transformer": "0.2.3",
     "simple-line-icons": "^2.4.1"
   },
   "devDependencies": {
-    "@simpli/resource-collection": "1.0.5",
+    "@simpli/resource-collection": "1.0.8",
     "@types/jest": "24.0.11",
     "@types/node": "10.11.7",
     "awesome-typescript-loader": "5.2.1",

@@ -14,7 +14,7 @@ const template = `
     <li v-if="current > first + gap + 1"
         class="adap-pagination__gap"><a>...</a></li>
 
-    <li v-for="n in gap * 2 + 1" v-if="index(n) > first && index(n) < last" 
+    <li v-for="n in gap * 2 + 1" v-if="index(n) > first && index(n) < last"
         class="adap-pagination__number"
         :class="{ 'adap-pagination__number--active': current === index(n) }">
       <a @click="goto(index(n))">{{index(n)}}</a>
@@ -61,15 +61,45 @@ export class AdapPagination extends Vue {
   }
 
   async goto(n: number) {
-    await this.collection.queryCurrentPage(n - 1)
+    try {
+      this.$emit('beforeGoto')
+      PageCollection.defaultBeforeQueryAction()
+      await this.collection.queryCurrentPage(n - 1)
+      this.$emit('afterGoto')
+      PageCollection.defaultAfterQueryAction()
+    } catch (e) {
+      this.$emit('errorGoto')
+      PageCollection.defaultErrorQueryAction()
+      throw e
+    }
   }
 
   async next() {
-    await this.collection.queryNextPage()
+    try {
+      this.$emit('beforeNext')
+      PageCollection.defaultBeforeQueryAction()
+      await this.collection.queryNextPage()
+      this.$emit('afterNext')
+      PageCollection.defaultAfterQueryAction()
+    } catch (e) {
+      this.$emit('errorNext')
+      PageCollection.defaultErrorQueryAction()
+      throw e
+    }
   }
 
   async prev() {
-    await this.collection.queryPrevPage()
+    try {
+      this.$emit('beforePrev')
+      PageCollection.defaultBeforeQueryAction()
+      await this.collection.queryPrevPage()
+      this.$emit('afterPrev')
+      PageCollection.defaultAfterQueryAction()
+    } catch (e) {
+      this.$emit('errorPrev')
+      PageCollection.defaultErrorQueryAction()
+      throw e
+    }
   }
 
   index(n: number) {
