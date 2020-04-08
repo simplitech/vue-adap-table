@@ -14,6 +14,7 @@ const template = `
 
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { PageCollection, IResource } from '@simpli/resource-collection'
+import AdapTableWrapper from './index'
 
 @Component({ template })
 export class AdapOrderby extends Vue {
@@ -27,15 +28,29 @@ export class AdapOrderby extends Vue {
   label!: string
 
   async orderBy() {
+    const options = AdapTableWrapper.options
+
     try {
       this.$emit('beforeQuery')
-      PageCollection.defaultBeforeQueryAction()
+
+      if (options.defaultBeforeQueryAction) {
+        options.defaultBeforeQueryAction()
+      }
+
       await this.collection.queryOrderBy(this.name)
+
       this.$emit('afterQuery')
-      PageCollection.defaultAfterQueryAction()
+
+      if (options.defaultAfterQueryAction) {
+        options.defaultAfterQueryAction()
+      }
     } catch (e) {
       this.$emit('errorQuery')
-      PageCollection.defaultErrorQueryAction()
+
+      if (options.defaultErrorQueryAction) {
+        options.defaultErrorQueryAction()
+      }
+
       throw e
     }
   }

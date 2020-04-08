@@ -39,6 +39,7 @@ const template = `
 
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { PageCollection, IResource } from '@simpli/resource-collection'
+import AdapTableWrapper from './index'
 
 @Component({ template })
 export class AdapPagination extends Vue {
@@ -61,43 +62,85 @@ export class AdapPagination extends Vue {
   }
 
   async goto(n: number) {
+    const options = AdapTableWrapper.options
+
     try {
       this.$emit('beforeGoto')
-      PageCollection.defaultBeforeQueryAction()
+
+      if (options.defaultBeforeQueryAction) {
+        options.defaultBeforeQueryAction()
+      }
+
       await this.collection.queryCurrentPage(n - 1)
+
       this.$emit('afterGoto')
-      PageCollection.defaultAfterQueryAction()
+
+      if (options.defaultAfterQueryAction) {
+        options.defaultAfterQueryAction()
+      }
     } catch (e) {
       this.$emit('errorGoto')
-      PageCollection.defaultErrorQueryAction()
+
+      if (options.defaultErrorQueryAction) {
+        options.defaultErrorQueryAction()
+      }
+
       throw e
     }
   }
 
   async next() {
+    const options = AdapTableWrapper.options
+
     try {
       this.$emit('beforeNext')
-      PageCollection.defaultBeforeQueryAction()
+
+      if (options.defaultBeforeQueryAction) {
+        options.defaultBeforeQueryAction()
+      }
+
       await this.collection.queryNextPage()
+
       this.$emit('afterNext')
-      PageCollection.defaultAfterQueryAction()
+
+      if (options.defaultAfterQueryAction) {
+        options.defaultAfterQueryAction()
+      }
     } catch (e) {
       this.$emit('errorNext')
-      PageCollection.defaultErrorQueryAction()
+
+      if (options.defaultErrorQueryAction) {
+        options.defaultErrorQueryAction()
+      }
+
       throw e
     }
   }
 
   async prev() {
+    const options = AdapTableWrapper.options
+
     try {
       this.$emit('beforePrev')
-      PageCollection.defaultBeforeQueryAction()
+
+      if (options.defaultBeforeQueryAction) {
+        options.defaultBeforeQueryAction()
+      }
+
       await this.collection.queryPrevPage()
+
       this.$emit('afterPrev')
-      PageCollection.defaultAfterQueryAction()
+
+      if (options.defaultAfterQueryAction) {
+        options.defaultAfterQueryAction()
+      }
     } catch (e) {
       this.$emit('errorPrev')
-      PageCollection.defaultErrorQueryAction()
+
+      if (options.defaultErrorQueryAction) {
+        options.defaultErrorQueryAction()
+      }
+
       throw e
     }
   }

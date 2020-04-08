@@ -10,7 +10,7 @@
   "es2015": "lib-esm/index.js",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/simplitech/vue-adap-table"
   },
   "license": "MIT",
   "engines": {
