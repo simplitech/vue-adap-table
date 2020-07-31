@@ -16,9 +16,9 @@ export default class AdapTableWrapper {
   static install(Vue: typeof _Vue, options?: AdapTableOptions) {
     this.options = options || {}
 
-    Vue.component(AdapOrderby.name, AdapOrderby)
-    Vue.component(AdapPagination.name, AdapPagination)
-    Vue.component(AdapSearchfield.name, AdapSearchfield)
+    Vue.component('AdapOrderby', AdapOrderby)
+    Vue.component('AdapPagination', AdapPagination)
+    Vue.component('AdapSearchfield', AdapSearchfield)
   }
 }
 
