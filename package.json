@@ -1,6 +1,6 @@
 {
   "name": "@simpli/vue-adap-table",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A Vue adaptable table, many components to be used to render and control lists",
   "keywords": [],
   "main": "lib/index.js",
