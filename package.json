@@ -63,17 +63,23 @@
   },
   "dependencies": {
     "lodash.debounce": "^4.0.8",
+    "css-element-queries": "^1.2.3",
     "vue": "^2.6.10",
     "vue-class-component": "^7.1.0",
     "vue-property-decorator": "^7.2.0"
   },
   "peerDependencies": {
     "@simpli/resource-collection": "1.0.8",
+    "@simpli/vue-await": "^1.0.5",
     "class-transformer": "0.2.3",
-    "simple-line-icons": "^2.4.1"
+    "simple-line-icons": "^2.4.1",
+    "swiper": "^6.1.1",
+    "vue-awesome-swiper": "^4.1.1",
+    "vue-transition-expand": "^0.1.0"
   },
   "devDependencies": {
     "@simpli/resource-collection": "1.0.8",
+    "@simpli/vue-await": "^1.0.5",
     "@types/jest": "24.0.11",
     "@types/node": "10.11.7",
     "awesome-typescript-loader": "5.2.1",
@@ -97,6 +103,7 @@
     "simple-line-icons": "^2.4.1",
     "standard-version": "5.0.2",
     "strip-json-comments-cli": "1.0.1",
+    "swiper": "^6.1.1",
     "ts-jest": "24.0.2",
     "ts-loader": "5.2.1",
     "tslint": "5.11.0",
@@ -105,9 +112,11 @@
     "tslint-react": "3.6.0",
     "typescript": "3.4.4",
     "validate-commit-msg": "2.14.0",
+    "vue-awesome-swiper": "^4.1.1",
     "vue-jest": "2.6.0",
     "vue-loader": "15.4.2",
     "vue-template-compiler": "^2.6.10",
+    "vue-transition-expand": "^0.1.0",
     "webpack": "4.41.5",
     "webpack-cli": "3.1.2"
   },

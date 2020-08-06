@@ -10,9 +10,11 @@ module.exports = {
   entry: {
     [packageName]: [
       resolve(__dirname, 'src/index.ts'),
+      resolve(__dirname, 'scss/adapExpansion.scss'),
       resolve(__dirname, 'scss/adapOrderby.scss'),
       resolve(__dirname, 'scss/adapPagination.scss'),
       resolve(__dirname, 'scss/adapSearchfield.scss'),
+      resolve(__dirname, 'scss/adapSwiper.scss'),
     ],
   },
   // Here the application starts executing

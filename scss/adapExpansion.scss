@@ -1,0 +1,6 @@
+.expansible {
+  .expansible__content {
+    @apply relative w-full;
+    transition: height 1000ms ease-in-out;
+  }
+}
