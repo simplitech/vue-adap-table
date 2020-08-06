@@ -1,6 +1,7 @@
 .expansible {
   .expansible__content {
-    @apply relative w-full;
+    position: relative;
+    width: 100%;
     transition: height 1000ms ease-in-out;
   }
 }

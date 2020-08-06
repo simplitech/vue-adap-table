@@ -1,16 +1,23 @@
 import { PageCollection, IResource } from '@simpli/resource-collection'
-import { classToClass, Exclude } from 'class-transformer'
+import { classToClass, Exclude, Expose, Type } from 'class-transformer'
 
 @Exclude()
 export abstract class ExpansibleCollection<R extends IResource> extends PageCollection<R> {
+  currentPage: number | null = null
   queryAsExpansible = this.queryAsPage
 
   items: R[] = [] // final list
   protected expandedItems: R[] = [] // anti-clone list
 
-  protected abstract addedItems: R[] = []
+  @Type(options => (options!.newObject as ExpansibleCollection<R>).classType)
+  @Expose({ name: 'items', toPlainOnly: true })
+  protected addedItems: R[] = [] // cache list (replaces items from PageCollection)
 
   protected isExpanding = false
+
+  get isLastPage() {
+    return this.currentPage === this.lastPage
+  }
 
   get maxPerPage() {
     const perPage = Number(this.perPage) || 0
