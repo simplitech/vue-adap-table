@@ -71,7 +71,7 @@
   "peerDependencies": {
     "@simpli/resource-collection": "1.1.0",
     "@simpli/vue-await": "^1.0.5",
-    "class-transformer": "0.2.3",
+    "class-transformer": "0.3.1",
     "simple-line-icons": "^2.4.1",
     "swiper": "^6.1.1",
     "vue-awesome-swiper": "^4.1.1",
@@ -83,7 +83,7 @@
     "@types/jest": "24.0.11",
     "@types/node": "10.11.7",
     "awesome-typescript-loader": "5.2.1",
-    "class-transformer": "0.2.3",
+    "class-transformer": "0.3.1",
     "commitizen": "4.0.3",
     "cross-var": "1.1.0",
     "css-loader": "1.0.0",
