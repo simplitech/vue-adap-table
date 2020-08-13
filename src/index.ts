@@ -4,7 +4,6 @@ import { AdapOrderby } from './AdapOrderby'
 import { AdapPagination } from './AdapPagination'
 import { AdapSearchfield } from './AdapSearchfield'
 import { AdapSwiper } from './AdapSwiper'
-import { ExpansibleCollection } from './ExpansibleCollection'
 import { MixinAdapRoute } from './MixinAdapRoute'
 import { MixinAdapScreenSize } from './MixinAdapScreenSize'
 
@@ -54,4 +53,4 @@ export default class AdapTableWrapper {
   }
 }
 
-export { AdapOrderby, AdapPagination, AdapSearchfield, ExpansibleCollection, MixinAdapRoute, MixinAdapScreenSize }
+export { AdapOrderby, AdapPagination, AdapSearchfield, MixinAdapRoute, MixinAdapScreenSize }

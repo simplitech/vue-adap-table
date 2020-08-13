@@ -34,8 +34,7 @@ const template = `
 
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator'
 import { ResizeSensor } from 'css-element-queries'
-import { IResource } from '@simpli/resource-collection'
-import { ExpansibleCollection } from './ExpansibleCollection'
+import { ExpansibleCollection, IResource } from '@simpli/resource-collection'
 
 @Component({ template })
 export class AdapExpansion extends Vue {

@@ -4,7 +4,7 @@ A Vue adaptable table, some components to be used to render and control [Page Co
 
 # Install
 ```
-npm i @simpli/vue-adap-table @simpli/resource-collection class-transformer simple-line-icons
+npm i @simpli/vue-adap-table @simpli/resource-collection @simpli/vue-await class-transformer simple-line-icons swiper vue-awesome-swiper vue-transition-expand
 ```
 
 ## Import
@@ -19,6 +19,8 @@ On your Scss:
 @import "~@simpli/vue-adap-table/scss/adapOrderby";
 @import "~@simpli/vue-adap-table/scss/adapPagination";
 @import "~@simpli/vue-adap-table/scss/adapSearchfield";
+@import "~@simpli/vue-adap-table/scss/adapExpansion";
+@import "~@simpli/vue-adap-table/scss/adapSwiper";
 $simple-line-font-path: "~simple-line-icons/fonts/" !default;
 @import "~simple-line-icons/scss/simple-line-icons";
 ```
@@ -66,9 +68,48 @@ export default class MyComponent extends Mixins(MixinAdapRoute) {
     // optionally you can use the mixin and initialize it with this method
     // so the browser URL will match the search, orderby and pagination properties
     this.initAdapRoute(this.collection)
-    
+
     // load the collection content using the mixin
     await this.query()
+  }
+}
+```
+
+## Usage AdapExpansion
+```html
+<adap-expansion spinner="customSpinner" :collection="collection">
+  <template slot="notEmpty">
+    <!--example using tailwind grid system-->
+    <div class="grid grid-cols-2 gap-10">
+      <div v-for="item in collection.items" :key="item.$id">
+        <div>
+          {{ item.$tag }}
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template slot="empty">
+    <div class="text-center text-xl">
+      Empty list
+    </div>
+  </template>
+
+  <template slot="expand" slot-scope="props">
+    <button @click="props.expandEvent">
+      Load more
+    </button>
+  </template>
+</adap-expansion>
+```
+On Code:
+```typescript
+@Component
+export default class MyComponent extends Vue {
+  collection = new MyCollection()
+
+  async created() {
+    await this.$await.run('customSpinner', () => this.collection.expand())
   }
 }
 ```

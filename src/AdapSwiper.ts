@@ -34,10 +34,9 @@ const template = `
 `
 
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator'
-import { IResource } from '@simpli/resource-collection'
+import { ExpansibleCollection, IResource } from '@simpli/resource-collection'
 import { SwiperOptions } from 'swiper'
 import { MixinAdapScreenSize } from './MixinAdapScreenSize'
-import { ExpansibleCollection } from './ExpansibleCollection'
 // @ts-ignore
 import { SwiperComponent } from 'vue-awesome-swiper'
 import AdapTableWrapper from './index'
