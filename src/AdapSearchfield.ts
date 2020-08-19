@@ -1,8 +1,10 @@
 const template = `
   <input type="text"
          v-if="collection"
-         class="adap-searchfield"
+         v-bind="vBind"
+         v-on="vOn"
          v-model="collection.search"
+         class="adap-searchfield"
          @keyup="search"
   />
 `
@@ -19,6 +21,16 @@ export class AdapSearchfield extends Vue {
 
   @Prop({ type: Number, default: 1000 })
   debounceTimer!: number
+
+  get vBind() {
+    return { ...this.$attrs }
+  }
+
+  get vOn() {
+    const listeners = { ...this.$listeners }
+    delete listeners.input
+    return { ...listeners }
+  }
 
   get querySearch(): () => Promise<any> {
     return debounce(() => this.debounceQuerySearch(), this.debounceTimer)
