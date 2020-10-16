@@ -17,7 +17,7 @@ declare module 'vue-awesome-swiper' {
   export { default as Swiper } from 'swiper'
 
   export class SwiperComponent extends Vue {
-    swiper: Swiper
+    $swiper: Swiper
     options: SwiperOptions
     globalOptions: SwiperOptions
     classes: {

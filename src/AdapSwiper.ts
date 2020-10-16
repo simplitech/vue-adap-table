@@ -142,14 +142,14 @@ export class AdapSwiper extends Mixins(MixinAdapScreenSize) {
   nextSlide() {
     const component = this.$refs.swiperComponent as SwiperComponent
     if (component) {
-      component.swiper.slideNext()
+      component.$swiper.slideNext()
     }
   }
 
   prevSlide() {
     const component = this.$refs.swiperComponent as SwiperComponent
     if (component) {
-      component.swiper.slidePrev()
+      component.$swiper.slidePrev()
     }
   }
 
@@ -157,9 +157,9 @@ export class AdapSwiper extends Mixins(MixinAdapScreenSize) {
     this.$emit('slideChange', args)
 
     this.isBeginning = Boolean(
-      this.swiperComponent && this.swiperComponent.swiper && this.swiperComponent.swiper.isBeginning
+      this.swiperComponent && this.swiperComponent.$swiper && this.swiperComponent.$swiper.isBeginning
     )
-    this.isEnd = Boolean(this.swiperComponent && this.swiperComponent.swiper && this.swiperComponent.swiper.isEnd)
+    this.isEnd = Boolean(this.swiperComponent && this.swiperComponent.$swiper && this.swiperComponent.$swiper.isEnd)
 
     if (this.hasReachedTheLimit || this.locked) return
 
