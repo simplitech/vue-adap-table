@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.2.0](https://github.com/simplitech/vue-adap-table/compare/v1.1.3...v1.2.0) (2020-10-16)
+
+
+### Features
+
+* Improved adapSwiper ([f22ebf8](https://github.com/simplitech/vue-adap-table/commit/f22ebf8))
+
+
+
 ## [1.1.3](https://github.com/simplitech/vue-adap-table/compare/v1.1.2...v1.1.3) (2020-08-19)
 
 
