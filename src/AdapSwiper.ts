@@ -7,9 +7,12 @@ const template = `
         <div class="adap-swiper__content">
           <swiper
             ref="swiperComponent"
-            class="swiper-container--sm-edge-preview"
+            v-bind="vBind"
+            v-on="vOn"
             :options="options"
+            :cleanupStylesOnDestroy="cleanupStylesOnDestroy"
             @slideChange="pageChangeEvent"
+            class="swiper-container--sm-edge-preview"
           >
             <swiper-slide
               v-for="(item, i) in slides"
@@ -35,7 +38,7 @@ const template = `
 
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator'
 import { ExpansibleCollection, IResource } from '@simpli/resource-collection'
-import { SwiperOptions } from 'swiper'
+import Swiper, { SwiperOptions } from 'swiper'
 import { MixinAdapScreenSize } from './MixinAdapScreenSize'
 // @ts-ignore
 import { SwiperComponent } from 'vue-awesome-swiper'
@@ -45,10 +48,16 @@ import AdapTableWrapper from './index'
 export class AdapSwiper extends Mixins(MixinAdapScreenSize) {
   @Prop({ type: Object, required: true })
   collection!: ExpansibleCollection<IResource>
+
   @Prop({ type: String })
   slideClass?: string
+
   @Prop({ type: String, default: 'list' })
   spinner!: string
+
+  @Prop({ type: Boolean, default: false })
+  cleanupStylesOnDestroy?: boolean
+
   @Prop({ type: Object })
   options?: SwiperOptions
 
@@ -61,6 +70,17 @@ export class AdapSwiper extends Mixins(MixinAdapScreenSize) {
   MEDIUM_SCREEN = AdapTableWrapper.screenMedium
   LARGE_SCREEN = AdapTableWrapper.screenLarge
 
+  get vBind() {
+    return { ...this.$attrs }
+  }
+
+  get vOn() {
+    const listeners = { ...this.$listeners }
+    delete listeners.input
+    delete listeners.slideChange
+    return listeners
+  }
+
   /**
    * In order to clean the cache, the collection empty its content and then repopulate it.
    * To prevent malfunction of swiper, this watch does not accept empty list
@@ -70,17 +90,6 @@ export class AdapSwiper extends Mixins(MixinAdapScreenSize) {
   async itemsEvent(items: IResource[]) {
     if (items && items.length) {
       this.slides = items
-
-      await this.$nextTick()
-
-      // https://github.com/surmon-china/vue-awesome-swiper/issues/317
-      const component = this.$refs.swiperComponent as SwiperComponent
-      if (component) {
-        component.swiper.destroy = () => {
-          // Não executar a função nativa pois existe um bug de layout
-          // A falta do destroy não interfere na performace pois o VUE já cuida do lifecycle
-        }
-      }
     }
   }
 
@@ -123,6 +132,13 @@ export class AdapSwiper extends Mixins(MixinAdapScreenSize) {
     this.collection.perPage = 4 * this.perPage
   }
 
+  mounted() {
+    const component = this.$refs.swiperComponent as SwiperComponent
+    if (component) {
+      this.$emit('init', component.$swiper)
+    }
+  }
+
   nextSlide() {
     const component = this.$refs.swiperComponent as SwiperComponent
     if (component) {
@@ -137,7 +153,9 @@ export class AdapSwiper extends Mixins(MixinAdapScreenSize) {
     }
   }
 
-  async pageChangeEvent() {
+  async pageChangeEvent(args: Swiper) {
+    this.$emit('slideChange', args)
+
     this.isBeginning = Boolean(
       this.swiperComponent && this.swiperComponent.swiper && this.swiperComponent.swiper.isBeginning
     )
@@ -149,6 +167,8 @@ export class AdapSwiper extends Mixins(MixinAdapScreenSize) {
       await this.expand()
       this.isEnd = false
     }
+
+    this.$emit('slideChangeAfterExpand', args)
   }
 
   async expand() {
@@ -161,5 +181,7 @@ export class AdapSwiper extends Mixins(MixinAdapScreenSize) {
       await this.collection.expand()
     }
     this.locked = false
+
+    this.$emit('expand')
   }
 }

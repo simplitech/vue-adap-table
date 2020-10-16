@@ -113,3 +113,74 @@ export default class MyComponent extends Vue {
   }
 }
 ```
+
+## Usage AdapSwiper
+AdapSwiper uses [vue-awesome-swiper](https://github.com/surmon-china/vue-awesome-swiper).
+All vue-awesome-swiper props and events are inherited to adap-swiper. See [docs](https://github.surmon.me/vue-awesome-swiper/) to learn more
+
+```html
+<adap-swiper
+  ref="adapSwiper"
+  spinner="customSpinner"
+  slideClass="custom-slide-class"
+  :collection="collection"
+  @init="updateEvent"
+  @slideChange="updateEvent"
+  @resize="updateEvent"
+  @expand="updateEvent"
+>
+  <template slot="header">
+    <!--Custom arrow swiper example-->
+    <a v-if="!isBeginning" @click="prevSlide()" >Go Left</a>
+    <a v-if="!isEnd" @click="nextSlide()" >Go Right</a>
+  </template>
+
+  <template slot="slide" slot-scope="props">
+    <!--example using tailwind-->
+    <div class="p-4 w-full h-80" :key="props.i">
+      <div>
+        {{ props.item.$tag }}
+      </div>
+    </div>
+  </template>
+
+  <template slot="empty">
+    Empty list
+  </template>
+</adap-swiper>
+```
+On Code:
+```typescript
+import Swiper from 'swiper'
+
+@Component
+export default class MyComponent extends Vue {
+  collection = new MyCollection()
+
+  isBeginning = false
+  isEnd = false
+
+  async created() {
+    await this.$await.run('customSpinner', () => this.collection.expand())
+  }
+
+  updateEvent(swiper: Swiper) {
+    this.isBeginning = swiper.isBeginning
+    this.isEnd = swiper.isEnd
+  }
+
+  nextSlide() {
+    const component = this.$refs.adapSwiper?.swiperComponent as any
+    if (component) {
+      component.$swiper?.slideNext()
+    }
+  }
+
+  prevSlide() {
+    const component = this.$refs.adapSwiper?.swiperComponent as any
+    if (component) {
+      component.$swiper?.slidePrev()
+    }
+  }
+}
+```
