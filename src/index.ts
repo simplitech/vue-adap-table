@@ -1,4 +1,5 @@
 import { Vue as _Vue } from 'vue/types/vue'
+import { SwiperOptions } from 'swiper'
 import { AdapExpansion } from './AdapExpansion'
 import { AdapOrderby } from './AdapOrderby'
 import { AdapPagination } from './AdapPagination'
@@ -11,6 +12,7 @@ export interface AdapTableOptions {
   defaultBeforeQueryAction?: () => void
   defaultAfterQueryAction?: () => void
   defaultErrorQueryAction?: () => void
+  swiperOptions?: SwiperOptions
   screenBounds?: {
     small?: number
     medium?: number

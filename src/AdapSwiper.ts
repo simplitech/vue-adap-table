@@ -98,8 +98,8 @@ export class AdapSwiper extends Mixins(MixinAdapScreenSize) {
   }
 
   get breakpoints(): Record<number, SwiperOptions | undefined> {
-    // @ts-ignore
-    const breakpoints = (this.$swiperGlobalOptions && this.$swiperGlobalOptions.breakpoints) || {}
+    const swiperOptions = AdapTableWrapper.options.swiperOptions
+    const breakpoints = (swiperOptions && swiperOptions.breakpoints) || {}
     return (this.options && this.options.breakpoints) || breakpoints
   }
 
