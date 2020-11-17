@@ -164,14 +164,14 @@ export class AdapSwiper extends Mixins(MixinAdapScreenSize) {
     if (this.hasReachedTheLimit || this.locked) return
 
     if (this.isEnd) {
-      await this.expand()
+      await this.expand(args)
       this.isEnd = false
     }
 
     this.$emit('slideChangeAfterExpand', args)
   }
 
-  async expand() {
+  async expand(args: Swiper) {
     this.locked = true
     // @ts-ignore
     if (this.$await) {
@@ -182,6 +182,6 @@ export class AdapSwiper extends Mixins(MixinAdapScreenSize) {
     }
     this.locked = false
 
-    this.$emit('expand')
+    this.$emit('expand', args)
   }
 }
