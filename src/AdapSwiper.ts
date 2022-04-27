@@ -23,7 +23,7 @@ const template = `
             </swiper-slide>
           </swiper>
 
-          <await :name="spinner" class="await__spinner--screen-light" style="z-index: 10" />
+          <await :name="spinner" class="await__spinner--screen-light" v-bind:class="{hidden: awaitIsHidden}" style="z-index: 10" />
         </div>
       </div>
 
@@ -51,6 +51,9 @@ export class AdapSwiper extends Mixins(MixinAdapScreenSize) {
 
   @Prop({ type: String })
   slideClass?: string
+
+  @Prop({ type: Boolean, default: false })
+  awaitIsHidden?: boolean
 
   @Prop({ type: String, default: 'list' })
   spinner!: string
