@@ -101,7 +101,7 @@
     "sass-loader": "7.1.0",
     "shx": "0.3.2",
     "simple-line-icons": "^2.4.1",
-    "standard-version": "5.0.2",
+    "standard-version": "8.0.1",
     "strip-json-comments-cli": "1.0.1",
     "swiper": "^6.3.3",
     "ts-jest": "24.0.2",
