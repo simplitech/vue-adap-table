@@ -36,7 +36,7 @@ const template = `
   </div>
 `
 
-import { Component, Prop, Watch, Mixins } from 'vue-property-decorator'
+import { Component, Prop, Watch, Mixins, Vue } from 'vue-property-decorator'
 import { ExpansibleCollection, IResource } from '@simpli/resource-collection'
 import Swiper, { SwiperOptions } from 'swiper'
 import { MixinAdapScreenSize } from './MixinAdapScreenSize'

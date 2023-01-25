@@ -85,7 +85,7 @@ export class AdapExpansion extends Vue {
     const el = this.$refs.content as HTMLElement
     el.style.height = `${height}px`
     el.style.overflow = 'hidden'
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 1000))
     el.style.overflow = 'unset'
   }
 }

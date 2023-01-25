@@ -1,4 +1,4 @@
-const {resolve} = require('path')
+const { resolve } = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const packageName = require('./package.json').name
@@ -50,7 +50,7 @@ module.exports = {
         include: /src/,
         use: [
           {
-            loader: 'awesome-typescript-loader',
+            loader: 'ts-loader',
             options: {
               // we don't want any declaration file in the bundles
               // folder since it wouldn't be of any use ans the source
